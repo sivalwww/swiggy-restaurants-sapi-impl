@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	
+	
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="618e88bd-3512-47ec-86d4-467333e562e0" >
+		<db:my-sql-connection host="${db.host}" port="3306" user="${db.username}" password="${db.password}" database="${db.name}" />
+	</db:config>
+	<configuration-properties doc:name="Configuration properties" doc:id="f09fc17e-24dc-43ed-9b5f-9a34e29835b7" file="swiggy-${env}.yaml" />
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="e818434b-abd0-4602-a441-3eed5f1aa156">
+		<http:listener-connection host="0.0.0.0" port="2021" />
+	</http:listener-config>
+	<global-property doc:name="Global Property" doc:id="835f8993-3948-487a-a33e-4ce7def1c8d2" name="env" value="prod" />
+	
+	</mule>

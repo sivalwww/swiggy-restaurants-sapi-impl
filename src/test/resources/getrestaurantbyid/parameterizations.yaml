@@ -1,0 +1,8 @@
+existingid:  
+  iattributes: "classpath://getrestaurantbyid/inputattributes-id-existing.dwl"
+  mockpayload: "classpath://getrestaurantbyid/mockdbpayload-id-existing.dwl"
+  assertexpressionpayload: "classpath://getrestaurantbyid/assertexpressionpayload.dwl"
+nonexistingid:  
+  iattributes: "classpath://getrestaurantbyid/inputattributes-id-notexisting.dwl"
+  mockpayload: "classpath://getrestaurantbyid/mockdbpayload-id-notexisting.dwl"
+  assertexpressionpayload: "classpath://getrestaurantbyid/assertexpressionpayload.dwl"

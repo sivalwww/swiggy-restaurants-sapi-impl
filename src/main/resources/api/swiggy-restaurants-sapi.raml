@@ -1,0 +1,50 @@
+#%RAML 1.0
+title: swiggy-restaurants-sapi
+baseUri: http://localhost:2021/api
+mediaType: 
+- application/json 
+
+
+resourceTypes:
+  collection: !include /exchange_modules/161ef839-d53a-4006-9e1e-760baade2093/swiggy-resourcetypes/1.0.1/resourceTypes/collection.raml
+  member: !include /exchange_modules/161ef839-d53a-4006-9e1e-760baade2093/swiggy-resourcetypes/1.0.1/resourceTypes/member.raml
+
+types:
+
+  Restaurant: !include /exchange_modules/161ef839-d53a-4006-9e1e-760baade2093/swiggy-datatypes/1.0.6/datatypes/Restaurant.raml
+  Menu:  !include /exchange_modules/161ef839-d53a-4006-9e1e-760baade2093/swiggy-datatypes/1.0.6/datatypes/Menu.raml
+  Menuitem:  !include /exchange_modules/161ef839-d53a-4006-9e1e-760baade2093/swiggy-datatypes/1.0.6/datatypes/MenuItem.raml
+
+
+traits:
+  Pageable: !include traits/Pageable.raml 
+
+/restaurants:
+  type: collection
+  get:      
+  post:  
+  /{id}:
+    type: member
+    get:
+    put:
+    delete:
+    /menus:
+      type: collection
+      get:           
+      post:
+      /{id}:
+        type: member
+        get:           
+        /menuitems:
+          type: collection
+          get:                
+          post:
+          /{id}:
+            type: member
+            get:
+            put:
+            delete:
+            /inventory:
+              get:
+              post:
+

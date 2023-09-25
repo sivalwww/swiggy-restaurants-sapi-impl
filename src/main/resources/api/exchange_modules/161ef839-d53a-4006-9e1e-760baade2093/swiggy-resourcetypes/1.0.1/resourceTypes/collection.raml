@@ -1,0 +1,32 @@
+#%RAML 1.0 ResourceType
+get?: 
+    description: GET All Restaurants
+    
+    responses:
+      200:
+       body: 
+         type: array
+         items: <<resourcePathName | !singularize | !uppercamelcase>>          
+           
+      500:   
+        body:
+          application/json: 
+            type: !include  /exchange_modules/161ef839-d53a-4006-9e1e-760baade2093/swiggy-datatypes/1.0.5/datatypes/CustomErrorMessage.raml 
+post?:
+  description: Add a new <<resourcePathName | !singularize>>
+  displayName: Add new <<resourcePathName | !singularize>>
+  body:
+    application/json:
+      type: <<resourcePathName | !singularize | !uppercamelcase>>
+  responses: 
+    201:
+      headers: 
+        Location:
+          description: URL of the new <<resourcePathName | !singularize>> information
+          example: /<<resourcePathName>>/8f19cb50-3f57-4d38
+      body: 
+    503:
+      body:
+        application/json:  
+          type: !include  /exchange_modules/161ef839-d53a-4006-9e1e-760baade2093/swiggy-datatypes/1.0.5/datatypes/CustomErrorMessage.raml
+          

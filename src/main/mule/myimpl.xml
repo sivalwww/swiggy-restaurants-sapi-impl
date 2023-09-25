@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="getRestaurantById" doc:id="c465725e-1007-4882-8b87-037f7034ccda" >
+		<logger level="INFO" doc:name="Logger" doc:id="a6951ecd-71f1-445f-be76-99603d4fe84d" message="#['getting  restaurant by id ' ++ vars.id]"/>
+		<db:select doc:name="getrestautantbyidfromdb" doc:id="f5826cd7-7a20-4cb0-8114-993a2c03d5aa" config-ref="Database_Config">
+			<db:sql ><![CDATA[select * from restaurant where restaurant_id= :id]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	id: vars.id
+}]]]></db:input-parameters>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="df0b9ff8-cd2e-45d0-9a52-13f03f0b4ff3" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+if(sizeOf(payload)>0){
+	address: {
+		pincode: payload[0].pincode default "",
+		city: payload[0].city default "",
+		street: payload[0].street default "",
+		houseNumber: payload[0].house_number default "",
+		addressId: payload[0].address_id
+	},
+	name: payload[0].name default "",
+	restaurantId: payload[0].restaurant_id
+}else {}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
